@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tebak Gambar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #555;
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .card h1 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .card h2 {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .options button {
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: #777;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .options button:hover {
+      background-color: #999;
+    }
+    .score {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Tebak Gambar</h1>
+    <h2>Aa Nastiar</h2>
+    <img src="jpg/banana texture.jpg" alt="">
+    
+    <div class="options">
+      <button onclick="checkAnswer('lemon')">lemon</button>
+      <button onclick="checkAnswer('pisang')">pisang</button>
+      <button onclick="checkAnswer('jeruk')">jeruk</button>
+      <button onclick="checkAnswer('pepaya')">pepaya</button>
+    </div>
+    <div class="score">Skor: <span id="score">0</span></div>
+  </div>
+
+  <script>
+    let score = 0;
+    function checkAnswer(answer) {
+      if(answer === "pisang") {
+        score++;
+        alert("Benar!");
+      } else {
+        alert("Salah");
+      }
+      document.getElementById("score").innerText = score;
+    }
+  </script>
+</body>
+</html>
