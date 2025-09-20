@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tebak Gambar Buah</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #555;
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .card h1 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .card h2 {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      height: 180px;
+      object-fit: cover;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .options button {
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: #777;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .options button:hover {
+      background-color: #999;
+    }
+    .score {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Tebak Gambar</h1>
+    <h2>Aa Nastiar</h2>
+    <img id="fruitImage" src="" alt="gambar buah">
+    
+    <div class="options" id="options"></div>
+    <div class="score">Skor: <span id="score">0</span></div>
+  </div>
+
+  <script>
+    let score = 0;
+    let current = 0;
+
+    // Daftar soal (4 gambar buah)
+    const questions = [
+      {
+        image: "https://media.istockphoto.com/id/1446544843/photo/banana-peel-texture-as-a-background-a-close-up-shot-of-a-banana-peel-macro-photo.jpg?s=612x612&w=0&k=20&c=p_R6ttn7zB_jPFPIKQgqaXDxYVLwuUy8dywlMYraZNE=",
+        answer: "pisang",
+        options: ["lemon", "pisang", "jeruk", "pepaya"],
+        alt: "pisang"
+      },
+      {
+        image: "https://t3.ftcdn.net/jpg/01/82/19/80/360_F_182198054_MZaPcAVtijKwbg2nhNffCVwDb0t7d9aq.jpg",
+        answer: "apel",
+        options: ["semangka", "apel", "mangga", "durian"],
+        alt: "apel"
+      },
+      {
+        image: "https://media.istockphoto.com/id/1296173875/photo/orange-rind-painted-texture-background-with-white-paint.jpg?s=612x612&w=0&k=20&c=5t4auSZUe0DNsqKpuS7cMnDE55YfJd0uiWHF_Zl78x0=",
+        answer: "jeruk",
+        options: ["jeruk", "melon", "pepaya", "pisang"],
+        alt: "jeruk"
+      },
+      {
+        image: "https://media.istockphoto.com/id/1337224600/photo/watermelon-texture-abstract-background-macro-watermelon-texture.jpg?s=612x612&w=0&k=20&c=WMH7aX4MbK8fzNObEqicrvSn0Uuvn67oJXgKzkuqT3o=",
+        answer: "semangka",
+        options: ["apel", "semangka", "pepaya", "anggur"],
+        alt: "semangka"
+      }
+    ];
+
+    function loadQuestion() {
+      if (current >= questions.length) {
+        alert("Permainan selesai! Skor akhir: " + score);
+        return;
+      }
+
+      const q = questions[current];
+      document.getElementById("fruitImage").src = q.image;
+      document.getElementById("fruitImage").alt = q.alt;
+
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(opt);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(answer) {
+      const q = questions[current];
+      if (answer === q.answer) {
+        score++;
+        alert("Benar!");
+      } else {
+        alert("Salah! Jawaban benar: " + q.answer);
+      }
+      document.getElementById("score").innerText = score;
+      current++;
+      loadQuestion();
+    }
+
+    // mulai permainan
+    loadQuestion();
+  </script>
+</body>
+</html>
